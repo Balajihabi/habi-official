@@ -180,48 +180,48 @@ function App() {
           />
           <Route path="/abc" element={<ProgressBar />} />
         </Routes>
-              </Suspense>
+        </Suspense>
         {/* Render Footer only if it's not the Projects page */}
         {location.pathname !== "/project" && <Footer />}
+        
+        {isPopupVisible && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-md">
+            <ConsultationPopup onClose={togglePopup} />
+          </div>
+        )}
+        {isQuotationVisible && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-md">
+            <QuotationPopup
+              isVisible={isQuotationVisible}
+              onClose={() => setIsQuotationVisible(false)}
+              quotationData={quotationData}
+              handleProgressiveBar={handleProgress}
+              handleCompleted={handleCompleted}
+            />
+          </div>
+        )}
+        {isProgressBarVisible && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-md">
+            <ProgressBar completed={completed} />
+          </div>
+        )}
+        {/* {!isPreloading && isAppLoaded && ( */}
+
+        {isHomeRoute && (
+          <CalculatorButton
+            className="hidden sm:block"
+            isAppLoaded={isAppLoaded}
+            onClickCalculator={handleCalculatorClick}
+          />
+        )}
+        {isCalculatorRoute && (
+          <HomeButton
+            className="hidden sm:block"
+            onClick={handleHomeButtonClick}
+          />
+        )}
       </div>
     </AuthProvider>
-      {isPopupVisible && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-md">
-          <ConsultationPopup onClose={togglePopup} />
-        </div>
-      )}
-      {isQuotationVisible && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-md">
-          <QuotationPopup
-            isVisible={isQuotationVisible}
-            onClose={() => setIsQuotationVisible(false)}
-            quotationData={quotationData}
-            handleProgressiveBar={handleProgress}
-            handleCompleted={handleCompleted}
-          />
-        </div>
-      )}
-      {isProgressBarVisible && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-md">
-          <ProgressBar completed={completed} />
-        </div>
-      )}
-      {/* {!isPreloading && isAppLoaded && ( */}
-
-      {isHomeRoute && (
-        <CalculatorButton
-          className="hidden sm:block"
-          isAppLoaded={isAppLoaded}
-          onClickCalculator={handleCalculatorClick}
-        />
-      )}
-      {isCalculatorRoute && (
-        <HomeButton
-          className="hidden sm:block"
-          onClick={handleHomeButtonClick}
-        />
-      )}
-    </div>
   );
 }
 
